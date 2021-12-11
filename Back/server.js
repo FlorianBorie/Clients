@@ -41,7 +41,6 @@ client.connect(err => {
     })
     .catch((err) => res.send(err));
   });
-  // client.close();
 });
 
 
