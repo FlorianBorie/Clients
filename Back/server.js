@@ -17,15 +17,31 @@ routes.use(cors());
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://toto:Azerty@cluster-clients.naa1h.mongodb.net/clients?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const DATABASE = "clients"
+
 //connexion à la base de donnée
 client.connect(err => {
     if(err) {
         throw Error(err);
     }
-  const collection = client.db("clients").collection("personnes");
-  console.log(`Success et connexion avec la basse de donnée`);
+  const collection = client.db(DATABASE).collection("personnes");
+  !err && console.log(`Success et connexion avec la basse de donnée`);
+  const db = client.db(DATABASE).collection("personnes"); 
   // perform actions on the collection object
-  client.close();
+
+  routes.get("/all", (req, res) => {
+    db.find()
+    .toArray()
+    .then((error, results) => {
+      if(error){ 
+        return res.send(error); 
+      }
+      res.status(200).send({ results });
+    })
+    .catch((err) => res.send(err));
+  });
+  // client.close();
 });
 
 
@@ -37,8 +53,4 @@ app.listen(PORT, () => {
 //routes
 routes.get("/", (req, res) => {
   res.send("Hello World!");
-});
- 
-routes.get("/all", (req, res) => {
-    res.send("Liste des clients");
 });
