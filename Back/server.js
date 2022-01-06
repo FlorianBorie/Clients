@@ -71,6 +71,20 @@ client.connect(err => {
     });
   })
 
+  // DELETE
+  routes.delete("/clients/:id", (req, res) => {
+    const o_id = new ObjectID(req.params.id);
+    db.deleteOne(
+      { _id: o_id })
+    .then((error, results) => {
+      if(error){ 
+        return res.send(error); 
+      }
+      res.status(200).send(`Suppression d'un client fait avec success !` + results);
+      // console.log(results)
+    })
+    .catch((err) => res.send(err));
+  });
 });
 
 // Port
