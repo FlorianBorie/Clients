@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const routes = express.Router();
 app.use("/api", routes)
+
  
 // body-parser
 routes.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +21,7 @@ const uri = "mongodb+srv://clienttest:Azerty33@cluster-clients.cdwsb.mongodb.net
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const DATABASE = "clients"
+const ObjectID = require('mongodb').ObjectId; 
 
 //connexion à la base de donnée
 client.connect(err => {
@@ -45,17 +47,19 @@ client.connect(err => {
   });
 
   // GET ID
-  // routes.get("/clients/:id", (req, res) => {
-  //   db.findOne({ },
-  //     { prenom: 1, nom: 1 })
-  //   .then((error, results) => {
-  //     if(error){ 
-  //       return res.send(error); 
-  //     }
-  //     res.status(200).send({ results });
-  //   })
-  //   .catch((err) => res.send(err));
-  // });
+  routes.get("/clients/:id", (req, res) => {
+    const o_id = new ObjectID(req.params.id);
+    db.findOne(
+      { _id: o_id })
+    .then((error, results) => {
+      if(error){ 
+        return res.send(error); 
+      }
+      res.status(200).send(results);
+      // console.log(results)
+    })
+    .catch((err) => res.send(err));
+  });
   
   // POST
   routes.post("/clients/add", jsonParser, function (req, res) {
@@ -66,14 +70,15 @@ client.connect(err => {
       res.send(err)
     });
   })
+
 });
 
-//port
+// Port
 app.listen(PORT, () => {
   console.log(`Mon serveur écoute sur http://localhost:${PORT}`);
 });
 
-//routes
+// Route principale
 routes.get("/", (req, res) => {
   res.send("Hello World!");
 });
