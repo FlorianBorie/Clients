@@ -15,7 +15,7 @@ let jsonParser = bodyParser.json();
 //cors
 routes.use(cors());
 
-//connexion au client
+// Connexion au client
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://clienttest:Azerty33@cluster-clients.cdwsb.mongodb.net/clients?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,7 +23,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const DATABASE = "clients"
 const ObjectID = require('mongodb').ObjectId; 
 
-//connexion à la base de donnée
+// Connexion à la base de donnée
 client.connect(err => {
     if(err) {
         throw Error(err);
@@ -56,7 +56,6 @@ client.connect(err => {
         return res.send(error); 
       }
       res.status(200).send(results);
-      // console.log(results)
     })
     .catch((err) => res.send(err));
   });
@@ -71,6 +70,21 @@ client.connect(err => {
     });
   })
 
+  // UPDATE
+  routes.put("/clients/:id", (req, res) => {
+    const o_id = new ObjectID(req.params.id);
+    db.updateOne(
+      { "_id": o_id },
+      { $set: {"prenom": req.body.prenom, "nom": req.body.nom, "mail": req.body.mail, "adresse": req.body.adresse }})
+    .then((error, results) => {
+      if(error){ 
+        return res.send(error); 
+      }
+      res.status(200).send(results);
+    })
+    .catch((err) => res.send(err));
+  });
+
   // DELETE
   routes.delete("/clients/:id", (req, res) => {
     const o_id = new ObjectID(req.params.id);
@@ -81,7 +95,6 @@ client.connect(err => {
         return res.send(error); 
       }
       res.status(200).send(`Suppression d'un client fait avec success !` + results);
-      // console.log(results)
     })
     .catch((err) => res.send(err));
   });
