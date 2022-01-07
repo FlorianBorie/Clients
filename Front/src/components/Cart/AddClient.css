@@ -1,0 +1,9 @@
+.FormAjout {
+    width: 50%;
+    text-align: left;
+    margin-left: 25%;
+}
+.FormAjout button{    
+    position: absolute;
+    left: 70%;
+}
