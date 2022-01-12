@@ -1,0 +1,13 @@
+.FormLogin {
+    width: 50%;
+    text-align: left;
+    margin-left: 25%;
+}
+.FormLogin button{    
+    position: absolute;
+    left: 70%;
+}
+.FormLogin a{    
+    text-decoration: none;
+    color: black;
+}
