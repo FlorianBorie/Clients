@@ -22,7 +22,7 @@ function Login() {
                     </Form.Text> */}
                 </Form.Group>
                 <div>
-                    <a href='/forbiden'>Mot de passe oublié !</a>
+                    <a href='/forbidden'>Mot de passe oublié !</a>
                     <Button variant="primary" type="submit">
                         Valider
                     </Button>

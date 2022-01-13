@@ -31,7 +31,7 @@ function NavBar() {
                     <Route exact path='/login' element={<Login/>}/>
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/add' element={<AddClient/>}/>
-                    <Route exact path='/forbiden' element={forbiden()}/>
+                    <Route exact path='/forbidden' element={forbidden()}/>
                     {/* <Route exact path='/register' element={<Register/>}/>
                     <Route exact path='/login' element={<Login/>}/> */}
                 </Routes>
@@ -39,7 +39,7 @@ function NavBar() {
         </BrowserRouter>
     );
 }
-function forbiden(){
+function forbidden(){
     return(
         <div>
             <h1>Vous avez oublié votre mot de passe !</h1>
