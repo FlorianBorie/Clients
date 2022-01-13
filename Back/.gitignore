@@ -88,7 +88,7 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+/node_modules
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -185,19 +185,6 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
-
-### react ###
-.DS_*
-**/*.backup.*
-**/*.back.*
-
-node_modules
-
-*.sublime*
-
-psd
-thumb
-sketch
 
 ### Windows ###
 # Windows thumbnail cache files
