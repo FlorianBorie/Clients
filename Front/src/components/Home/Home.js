@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {InputGroup, Button} from 'react-bootstrap';
+import './Home.css'
 
 class Home extends React.Component {
 
@@ -66,21 +67,27 @@ class Home extends React.Component {
         if(!clients.length) return null;
 
         return clients.map((client, index) => (
-            <div key={index}>
-                <div className="col-md-9 mt-5">
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text  id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.prenom}</InputGroup.Text>
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.nom}</InputGroup.Text>
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.mail}</InputGroup.Text>
-                    </InputGroup>
-                    <Button onClick={this.deleteClients.bind(this)} style={{color : "black",borderStyle: "none"}}>Supprimer</Button>
+            <div key={index} className='container'>
+            <div className="row">
+                <InputGroup className="col">
+                    <InputGroup.Text  id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.prenom}</InputGroup.Text>
+                </InputGroup>
+                <InputGroup className="col">
+                    <InputGroup.Text id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.nom}</InputGroup.Text>
+                </InputGroup>
+                <InputGroup className="col">
+                    <InputGroup.Text id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.mail}</InputGroup.Text>
+                </InputGroup>
+                <InputGroup className="col">
+                    <InputGroup.Text id="inputGroup-sizing-default" style={{marginBottom:"3%"}}>{client.adresse}</InputGroup.Text>
+                </InputGroup>
+                <div>
+                <Button type="button" variant="success">Modifier</Button>
+                <Button variant="danger" onClick={this.deleteClients.bind(this)}>Supprimer</Button>
                 </div>
-                {/* </Link> */}
             </div>
+            {/* </Link> */}
+        </div>
         ));
     }
 
