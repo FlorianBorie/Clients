@@ -19,48 +19,28 @@ class Home extends React.Component {
     }
 
     getClients = () => {
-        axios.get('http://localhost:4000/api/clients/all')
-        .then((reponse) => {
+        axios.get('http://localhost:4000/api/clients')
+        .then((reponse, req) => {
             const data = reponse.data;
             this.setState({ clients: data});
             console.log("Data bien reçu")
             console.log(this.state.clients)
-            console.log(this.state)
+            // const dataId = this.state.clients
         })
         .catch(() => {
             alert('Error avec les datas !!')
         })
     }
 
-    // setId = (clients) => {
-    //     axios.get('http://localhost:4000/api/clients/all')
-    //     .then((reponse) => {
-    //         const toto = reponse.data;
-    //         this.setState({ id: toto.client._id})
-    //     })
-    //     .catch(() => {
-
-    //     })
-    // }
-
-    getId = (clients) =>{
-
-        if(!clients.length) return null;
-
-        return clients.map((client, index) => (
-            this.setState({id : clients._id})
-        ));
-    }
-
-    deleteClients = (client) => {
-        axios.delete(`http://localhost:4000/api/clients/${this.state.id}`) 
+    deleteClients = (clientId) => {
+        axios.delete(`http://localhost:4000/api/clients/${clientId}`) 
         .then(() => {
             alert('Clients delete')
-        })
+        } )
         .catch(() => {
             alert('Impossible de delete whouwhou')
         })
-    }
+    }   
 
     displayClients = (clients) =>{
 
@@ -83,7 +63,7 @@ class Home extends React.Component {
                 </InputGroup>
                 <div>
                 <Button type="button" variant="success">Modifier</Button>
-                <Button variant="danger" onClick={this.deleteClients.bind(this)}>Supprimer</Button>
+                <Button variant="danger" onClick={() => this.deleteClients(client._id)}>Supprimer</Button>
                 </div>
             </div>
             {/* </Link> */}

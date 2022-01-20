@@ -2,43 +2,73 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './AddClient.css'
+import axios from 'axios';
 
-function AddClient() {
-    return (
-    <div className="shopping-list">
-        <h1>Bienvenue sur la page pour ajouter des clients !</h1>
-        <div className='FormAjout'>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicNom">
-                    <Form.Label>Nom</Form.Label>
-                    <Form.Control type="text" placeholder="Entrer votre nom" />
-                </Form.Group>
+class AddClient extends React.Component {
 
-                <Form.Group className="mb-3" controlId="formBasicPrenom">
-                    <Form.Label>Prénom</Form.Label>
-                    <Form.Control type="text" placeholder="Entrer votre prénom" />
-                </Form.Group>
+    state = {
+        prenom: '',
+        nom: '',
+        mail: '',
+        adresse: '',
+      }
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Entrer votre email" />
-                    {/* <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text> */}
-                </Form.Group>
+    handleChange = event => {
+        this.setState({prenom: event.target.value});
+      }
+    
+      handleSubmit = event => {
+        event.preventDefault();
+    
+        const clients = {
+          prenom: this.state.prenom,
+        //   nom: this.state.nom,
+        //   mail: this.state.mail,
+        //   adresse: this.state.adresse,
+        };
+    
+        axios.post(`http://localhost:4000/api/clients/add`, { clients })
+          .then(res => {
+            console.log(res);
+            console.log(res.data);
+            console.log(this.state)
+          })
 
-                <Form.Group className="mb-3" controlId="formBasicAdresse">
-                    <Form.Label>Adresse</Form.Label>
-                    <Form.Control type="text" placeholder="Entrer votre adresse" />
-                </Form.Group>
-                
-                <Button variant="primary" type="submit">
-                    Ajouter
-                </Button>
-            </Form>
-        </div>
-    </div>
-    );
 }
 
-export default AddClient;
+render() {
+    return(
+        <div className="shopping-list">
+            <h1>Bienvenue sur la page pour ajouter des clients !</h1>
+            <div className='FormAjout'>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicNom">
+                        <Form.Label name="nom" onChange={this.handleChange}>Nom</Form.Label>
+                        <Form.Control type="text" placeholder="Entrer votre nom" />
+                    </Form.Group>
+
+                    {/* <Form.Group className="mb-3" controlId="formBasicPrenom">
+                        <Form.Label name="prenom" onChange={this.handleChange}>Prénom</Form.Label>
+                        <Form.Control type="text" placeholder="Entrer votre prénom" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label name="mail" onChange={this.handleChange}>Email</Form.Label>
+                        <Form.Control type="email" placeholder="Entrer votre email" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicAdresse">
+                        <Form.Label name="adresse" onChange={this.handleChange}>Adresse</Form.Label>
+                        <Form.Control type="text" placeholder="Entrer votre adresse" />
+                    </Form.Group> */}
+                
+                    <Button variant="primary" type="submit">
+                        Ajouter
+                    </Button>
+                </Form>
+            </div>
+        </div>
+    )}
+}
+
+export default AddClient; 
