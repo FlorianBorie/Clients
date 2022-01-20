@@ -34,7 +34,7 @@ client.connect(err => {
   // perform actions on the collection object
 
   // GET ALL
-  routes.get("/clients/all", (req, res) => {
+  routes.get("/clients", (req, res) => {
     db.find()
     .toArray()
     .then((error, results) => {
