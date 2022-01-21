@@ -8,26 +8,42 @@ class AddClient extends React.Component {
 
     state = {
         prenom: '',
-        nom: '',
-        mail: '',
-        adresse: '',
+         nom: '',
+         mail: '',
+         adresse: '',
       }
 
-    handleChange = event => {
-        this.setState({prenom: event.target.value});
-      }
+    handleChangePrenom = event => {
+        this.setState({prenom: event.target.value})
+    }
+
+    handleChangeNom = event => {
+        this.setState({nom: event.target.value})
+    }
+
+    handleChangeMail = event => {
+        this.setState({mail: event.target.value})
+    }
+
+    handleChangeAdresse = event => {
+        this.setState({adresse: event.target.value})
+    }
     
       handleSubmit = event => {
         event.preventDefault();
     
-        const clients = {
+        const clients = JSON.stringify({
           prenom: this.state.prenom,
-        //   nom: this.state.nom,
-        //   mail: this.state.mail,
-        //   adresse: this.state.adresse,
-        };
+           nom: this.state.nom,
+           mail: this.state.mail,
+           adresse: this.state.adresse,
+        });
     
-        axios.post(`http://localhost:4000/api/clients/add`, { clients })
+        axios.post(`http://localhost:4000/api/clients/add`, clients, {
+            
+            "headers": {
+            "content-type": "application/json",
+            },})
           .then(res => {
             console.log(res);
             console.log(res.data);
@@ -43,24 +59,24 @@ render() {
             <div className='FormAjout'>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicNom">
-                        <Form.Label name="nom" onChange={this.handleChange}>Nom</Form.Label>
-                        <Form.Control type="text" placeholder="Entrer votre nom" />
+                        <Form.Label >Nom</Form.Label>
+                        <Form.Control type="text" name="nom" onChange={this.handleChangePrenom} placeholder="Entrer votre nom" />
                     </Form.Group>
 
-                    {/* <Form.Group className="mb-3" controlId="formBasicPrenom">
-                        <Form.Label name="prenom" onChange={this.handleChange}>Prénom</Form.Label>
-                        <Form.Control type="text" placeholder="Entrer votre prénom" />
+                    <Form.Group className="mb-3" controlId="formBasicPrenom">
+                        <Form.Label >Prénom</Form.Label>
+                        <Form.Control type="text" name="prenom" onChange={this.handleChangeNom} placeholder="Entrer votre prénom" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label name="mail" onChange={this.handleChange}>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Entrer votre email" />
+                        <Form.Label >Email</Form.Label>
+                        <Form.Control type="email" name="mail" onChange={this.handleChangeMail} placeholder="Entrer votre email" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicAdresse">
-                        <Form.Label name="adresse" onChange={this.handleChange}>Adresse</Form.Label>
-                        <Form.Control type="text" placeholder="Entrer votre adresse" />
-                    </Form.Group> */}
+                        <Form.Label >Adresse</Form.Label>
+                        <Form.Control type="text" name="adresse" onChange={this.handleChangeAdresse} placeholder="Entrer votre adresse" />
+                    </Form.Group>
                 
                     <Button variant="primary" type="submit">
                         Ajouter
