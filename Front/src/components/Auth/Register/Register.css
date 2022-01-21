@@ -1,4 +1,4 @@
-.FormRegister {
+/* .FormRegister {
     width: 50%;
     text-align: left;
     margin-left: 25%;
@@ -6,8 +6,9 @@
 .FormRegister button{    
     position: absolute;
     left: 70%;
+    width: 100%;
 }
 .FormRegister a{    
     text-decoration: none;
     color: black;
-}
+} */
