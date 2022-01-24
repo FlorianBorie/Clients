@@ -1,9 +1,10 @@
 import React from "react";
-import { Navbar, Nav, Container} from 'react-bootstrap';
+import { Navbar, Nav, Container, Button} from 'react-bootstrap';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import emailjs from '@emailjs/browser';
+// import Form from 'react-bootstrap/Form';
+// import Button from 'react-bootstrap/Button';
+// import emailjs from '@emailjs/browser';
+import useAuthentication from '../../lib/hooks/useAuthentication/index';
 
 // Pages
 import Home from '../Home/Home';
@@ -13,6 +14,11 @@ import Register from "../Auth/Register/Register";
 import  Contact  from "../Auth/Login/Contact";
 
 function NavBar() {
+    const { handleUserLogout } = useAuthentication();
+    const logout = () => {
+        handleUserLogout();
+        setTimeout(() => window.location.reload(), 1000)
+    }
     return (
         <BrowserRouter>
             <div>
@@ -27,6 +33,7 @@ function NavBar() {
                         {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                         </Nav>
                     </Container>
+                    <Button onClick={handleUserLogout}>Déconnexion</Button>
                 </Navbar>
                 <Routes>
                     <Route exact path='/register' element={<Register/>}/>

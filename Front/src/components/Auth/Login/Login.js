@@ -1,34 +1,14 @@
 import React, {useEffect} from 'react';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {useFormValidation} from '../../../lib/hooks/useFormValidation/index';
 import * as Input from '../Input';
 import './Login.css';
+import useAuthentication from '../../../lib/hooks/useAuthentication/index';
 
-const Alert = ({ isVisible }) => (
-	isVisible &&
-	<div className="alert alert-info mt-3">
-		<p className="icontext"><i className="icon text-primary fa fa-thumbs-up"></i>User successfully connected</p>
-    </div>
-)
-const ErrorMessage = ({ error }) => (
-	error && 
-	<div className="alert alert-danger mt-3">
-		<p className="icontext]" style={{ color: 'crimson' }}><i className="icon text-danger fas fa-exclamation-circle"></i> {' '}{error?.error}</p>
-    </div>
-)
-
-const defaultValues = {
-	email: 'sandy@gmail.com' ,
-	password: '' ,
-}
-
-const Login = () => { 
-    const navigation = useNavigate();
-    const {formValues, validate, register, handleOnChange, isValid} = useFormValidation({formName: "login"});
+const Login = ({history}) => { 
+    const { handleUserLogin } = useAuthentication();
+    const {formValues, validate, handleOnChange, isValid} = useFormValidation({formName: "login"});
     const {email, password} = formValues["login"] ?? {};
-    // useEffect(() => {
-    //     register(defaultValues);
-    // }, []);
 
     useEffect(() => {
         validate(formValues["login"] ?? {})
@@ -36,8 +16,13 @@ const Login = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        setTimeout(Navigate.push('/'), 2000)
-    };
+        handleUserLogin(email, password).then((currentUser) => {
+            console.log(currentUser);
+            alert("Vous avez bien été logger !")
+            currentUser && setTimeout(() => history.push("/", 2000));
+        })
+    }
+
 
   return(<>
 		<div className="card mx-auto" style={{maxWidth: '380px', marginTop:'200px'}}>

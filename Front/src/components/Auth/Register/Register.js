@@ -1,43 +1,14 @@
 import React, {useEffect} from 'react';
-// import Form from 'react-bootstrap/Form';
-// import Button from 'react-bootstrap/Button';
-import { Provider, useDispatch } from 'react-redux'
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { useFormValidation } from '../../../lib/hooks/useFormValidation/index';
 import * as Input from "../Input";
 import './Register.css';
 import useAuthentication from '../../../lib/hooks/useAuthentication/index';
 
-const Alert = ({ isVisile }) => {
-    isVisile &&
-    <div className='alert alert-info mt-3'>
-        <p className='icontext'><i className='icon text-primary fa fa-thumbs-up'></i>L'utilisateur à été ajouté avec success</p>
-    </div>
-}
-
-const ErrorMessage = ({ error }) => {
-    error &&
-    <div className='alert alert-danger mt-3'>
-        <p className='icontext' style={{color: "crimson"}}><i className='icon text-danger fas fa-exclamation-circle'></i>{' '}{error?.error}</p>
-    </div>
-}
-
-// const defaultValues = {
-//     prenom: "sandy",
-//     nom: "last",
-//     mail: "sandy@gmail.com",
-//     password: "test12345",
-//   };
-
 const Register = ({history}) => {
-  // const dispatch = useDispatch();
   const { handleUserRegistration } = useAuthentication();
-  // const navigation = useNavigate();
-  const {formValues, validate, register, handleOnChange, isValid} = useFormValidation({formName: "register"});
+  const {formValues, validate, handleOnChange, isValid} = useFormValidation({formName: "register"});
   const {prenom, nom, email, password} = formValues["register"] ?? {};
-  // useEffect(() => {
-  //     register(defaultValues);
-  // }, []);
 
   useEffect(() => {
       validate(formValues["register"] ?? {})
@@ -51,11 +22,11 @@ const Register = ({history}) => {
         email,
         password
       };
-      handleUserRegistration(newUser).then(() => {
+      handleUserRegistration(newUser).then((user) => {
         console.log("Utilisateur bien enregistré !")
-        // setTimeout(() => history.push("/", 2000));
-      })
-      // navigation.push("/");
+        alert("Vous avez bien été enregistré !")
+        user && setTimeout(() => history.push("/", 2000));
+      }).catch(alert("l'utilisateur est déjà pris !"))
   };
 
     return (
@@ -68,7 +39,6 @@ const Register = ({history}) => {
             <header className="mb-4">
               <h4 className="card-title">S'inscrire</h4>
             </header>
-            {/* feedback et message d'erreurs */}
             <form name="register" onSubmit={handleOnSubmit}>
               <div className="form-row">
                 <Input.Text
@@ -96,14 +66,11 @@ const Register = ({history}) => {
                 />
               </div>
               <div className="form-group">
-                <a href='"/'>
-                  <Input.Submit
-                    classNames="btn-primary btn-block"
-                    title="S'inscrire"
-                    disabled={!isValid}
-                  />
-
-                </a>
+                <Input.Submit
+                  classNames="btn-primary btn-block"
+                  title="S'inscrire"
+                  disabled={!isValid}
+                />
               </div>
             </form>
           </article>
@@ -118,4 +85,4 @@ const Register = ({history}) => {
     );
 }
 
-export default Register;
+export default (Register);
