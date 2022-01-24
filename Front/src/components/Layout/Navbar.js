@@ -33,7 +33,7 @@ function NavBar() {
                         {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                         </Nav>
                     </Container>
-                    <Button onClick={handleUserLogout}>Déconnexion</Button>
+                    <Button onClick={logout}>Déconnexion</Button>
                 </Navbar>
                 <Routes>
                     <Route exact path='/register' element={<Register/>}/>
