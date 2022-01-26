@@ -1,3 +1,12 @@
 .row{
     border: 2px solid;
 }
+.col{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.btnHome {
+    width: 21%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}

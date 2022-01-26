@@ -5,7 +5,7 @@ import * as Input from "../Input";
 import './Register.css';
 import useAuthentication from '../../../lib/hooks/useAuthentication/index';
 
-const Register = ({history}) => {
+const Register = () => {
   const { handleUserRegistration } = useAuthentication();
   const {formValues, validate, handleOnChange, isValid} = useFormValidation({formName: "register"});
   const {prenom, nom, email, password} = formValues["register"] ?? {};
@@ -25,8 +25,8 @@ const Register = ({history}) => {
       handleUserRegistration(newUser).then((user) => {
         console.log("Utilisateur bien enregistré !")
         alert("Vous avez bien été enregistré !")
-        user && setTimeout(() => history.push("/", 2000));
-      }).catch(alert("l'utilisateur est déjà pris !"))
+        user && setTimeout(() => window.location.assign('/login'), 1000)
+      })
   };
 
     return (

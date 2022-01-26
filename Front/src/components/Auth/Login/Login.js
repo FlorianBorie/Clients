@@ -5,7 +5,7 @@ import * as Input from '../Input';
 import './Login.css';
 import useAuthentication from '../../../lib/hooks/useAuthentication/index';
 
-const Login = ({history}) => { 
+const Login = () => { 
     const { handleUserLogin } = useAuthentication();
     const {formValues, validate, handleOnChange, isValid} = useFormValidation({formName: "login"});
     const {email, password} = formValues["login"] ?? {};
@@ -19,7 +19,7 @@ const Login = ({history}) => {
         handleUserLogin(email, password).then((currentUser) => {
             console.log(currentUser);
             alert("Vous avez bien été logger !")
-            currentUser && setTimeout(() => history.push("/", 2000));
+            currentUser && setTimeout(() => window.location.assign('/'), 1000);
         })
     }
 

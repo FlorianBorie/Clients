@@ -8,10 +8,10 @@ class AddClient extends React.Component {
 
     state = {
         prenom: '',
-         nom: '',
-         mail: '',
-         adresse: '',
-      }
+        nom: '',
+        mail: '',
+        adresse: '',
+    }
 
     handleChangePrenom = event => {
         this.setState({prenom: event.target.value})
@@ -48,6 +48,7 @@ class AddClient extends React.Component {
             console.log(res);
             console.log(res.data);
             console.log(this.state)
+            setTimeout(() => window.location.assign('/'), 1000)
           })
 
 }
