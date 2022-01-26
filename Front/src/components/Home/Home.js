@@ -64,7 +64,7 @@ class Home extends React.Component {
                     <InputGroup.Text id="inputGroup-sizing-default">{client.adresse}</InputGroup.Text>
                 </InputGroup>
                 <div className='btnHome'>
-                    <Button style={{marginRight:"5%"}} type="button" variant="success"><FaPencilAlt /> Modifier</Button>
+                    <Button style={{marginRight:"5%"}} type="button" href="/put" variant="success"><FaPencilAlt /> Modifier</Button>
                     <Button variant="danger" onClick={() => this.deleteClients(client._id)}><FaTrashAlt /> Supprimer</Button>
                 </div>
             </div>
