@@ -9,6 +9,7 @@ import AddClient from "../Cart/AddClient";
 import Login from "../Auth/Login/Login";
 import Register from "../Auth/Register/Register";
 import  Contact  from "../Auth/Login/Contact";
+import PutClient from "../Pages/PutClient";
 
 function NavBar() {
     // const token = localStorage.getItem('app-token');
@@ -78,6 +79,7 @@ function NavBar() {
                         <Route exact path='/login' element={<Login/>}/>
                         <Route exact path='/' element={<Home/>}/>
                         <Route exact path='/add' element={<AddClient/>}/>
+                        <Route exact path='/put' element={<PutClient/>}/>
                         {/* <Route exact path='/forbidden' element={<Contact/>}/> */}
                         {/* <Route exact path='/register' element={<Register/>}/>
                         <Route exact path='/login' element={<Login/>}/> */}
