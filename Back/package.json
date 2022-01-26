@@ -17,6 +17,8 @@
     "express": "^4.17.1",
     "http-server": "^14.1.0",
     "mongodb": "^4.2.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0"
   }
 }
