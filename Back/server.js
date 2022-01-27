@@ -68,7 +68,7 @@ client.connect(err => {
  *     type: string
  *     description: prenom du client
  *     example: 'test'
- *    email:
+ *    mail:
  *     type: string
  *     description: mail du client
  *     example: 'jayaramachandran@whizpath.com'
