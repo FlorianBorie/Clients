@@ -10,6 +10,7 @@ export default function Contact() {
     emailjs.sendForm('service_6u6we2i', 'template_scsq9je', form.current, 'user_L2OhZMvSPR4uKFbbo4TGD')
       .then((result) => {
           console.log(result.text);
+          alert("Mail bien envoyé !")
       }, (error) => {
           console.log(error.text);
       });

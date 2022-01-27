@@ -69,7 +69,6 @@ function NavBar() {
                             <Nav.Link href="/add">Ajouter</Nav.Link>
                             <Nav.Link href="/login">Login</Nav.Link>
                             <Nav.Link href="/register">Register</Nav.Link>
-                            {/* <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                             </Nav>
                         </Container>
                         <Button onClick={logout}>Déconnexion</Button>
@@ -80,9 +79,7 @@ function NavBar() {
                         <Route exact path='/' element={<Home/>}/>
                         <Route exact path='/add' element={<AddClient/>}/>
                         <Route exact path='/put' element={<PutClient/>}/>
-                        {/* <Route exact path='/forbidden' element={<Contact/>}/> */}
-                        {/* <Route exact path='/register' element={<Register/>}/>
-                        <Route exact path='/login' element={<Login/>}/> */}
+                        <Route exact path='/forbidden' element={<Contact/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
